@@ -3,10 +3,9 @@
 ## Visão Geral
 
 Este documento analisa a aplicação dos princípios SOLID e padrões de projeto no backend do sistema Adote Fácil, identificando tanto os padrões já implementados quanto oportunidades de melhoria.
-
 ## Princípios SOLID
 
-### 1. **Single Responsibility Principle (SRP) - Aplicado**
+### 1. **Princípio da responsabilidade única - Aplicado**
 
 **Definição**: Uma classe deve ter apenas uma razão para mudar.
 
@@ -57,7 +56,7 @@ export class UserRepository {
 }
 ```
 
-### 2. **Open/Closed Principle (OCP) - Aplicado**
+### 2. **Princípio Aberto-Fechado - Aplicado**
 
 **Definição**: Entidades devem estar abertas para extensão, mas fechadas para modificação.
 
@@ -90,7 +89,7 @@ export class Argon2Encrypter implements Encrypter {
 }
 ```
 
-### 3. **Liskov Substitution Principle (LSP) - Aplicado**
+### 3. **Princípio da substituição de Liskov - Aplicado**
 
 **Definição**: Objetos de uma superclasse devem poder ser substituídos por objetos de uma subclasse sem quebrar a aplicação.
 
@@ -108,7 +107,7 @@ const service1 = new CreateUserService(new BcryptEncrypter(), userRepository)
 const service2 = new CreateUserService(new Argon2Encrypter(), userRepository)
 ```
 
-### 4. **Interface Segregation Principle (ISP) - Parcialmente Aplicado**
+### 4. **Princípio da Segregação da Interface - Parcialmente Aplicado**
 
 **Definição**: Clientes não devem ser forçados a depender de interfaces que não utilizam.
 
@@ -145,7 +144,7 @@ export class UserRepository implements UserCreator, UserFinder, UserUpdater, Use
 }
 ```
 
-### 5. **Dependency Inversion Principle (DIP) - Aplicado**
+### 5. **Princípio da inversão da dependência - Aplicado**
 
 **Definição**: Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações.
 
@@ -165,7 +164,7 @@ export const createUserServiceInstance = new CreateUserService(
 )
 ```
 
-## 🏗️ Padrões de Projeto Identificados
+## Padrões de Projeto Identificados
 
 ### 1. **Singleton Pattern - Aplicado**
 
@@ -204,7 +203,6 @@ export class CreateUserController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const result = await this.createUser.execute(request.body)
-    // ...
   }
 }
 
@@ -336,7 +334,6 @@ export class ServiceFactory {
   }
 }
 
-// Uso
 const userService = ServiceFactory.createUserService()
 ```
 
