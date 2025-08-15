@@ -8,10 +8,9 @@ export class Authenticator {
   }
 
   validateToken<T = object>(token: string): T | null {
-    const secret = process.env.JWT_SECRET || 'secret'
-
     try {
-      return jwt.verify(token, secret) as T
+      // Usa apenas a propriedade da classe, sem redeclarar o secret
+      return jwt.verify(token, this.secret) as T
     } catch (err) {
       const error = err as Error
       console.log({ error })
@@ -21,3 +20,6 @@ export class Authenticator {
 }
 
 export const authenticatorInstance = new Authenticator()
+
+
+

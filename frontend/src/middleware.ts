@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtDecode } from 'jwt-decode'
 
-const isValidToken = (token: string | undefined): boolean => {
-  if (!token) return false
+// Separando responsabilidades (Smell 1)
+const hasToken = (token?: string): boolean => !!token
 
+const isTokenValid = (token: string): boolean => {
   try {
     const decoded: { exp: number } = jwtDecode(token)
+
+    // Checa se o token ainda é válido
     return decoded.exp > Date.now() / 1000
-  } catch (e) {
+  } catch (error) {
+    // Swallowing exceptions tratado com log (Smell 2)
+    console.error('Token inválido ou erro ao decodificar:', error)
     return false
   }
 }
@@ -15,7 +20,7 @@ const isValidToken = (token: string | undefined): boolean => {
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value
 
-  if (!isValidToken(token)) {
+  if (!hasToken(token) || !isTokenValid(token!)) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
@@ -25,3 +30,5 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/', '/area_logada/:path*'],
 }
+
+
