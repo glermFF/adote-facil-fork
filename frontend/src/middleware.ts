@@ -20,7 +20,7 @@ const isTokenValid = (token: string): boolean => {
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value
 
-  if (!hasToken(token) || !isTokenValid(token!)) {
+  if (!hasToken(token) || (isTokenValid(token!))) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
@@ -30,5 +30,3 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/', '/area_logada/:path*'],
 }
-
-
