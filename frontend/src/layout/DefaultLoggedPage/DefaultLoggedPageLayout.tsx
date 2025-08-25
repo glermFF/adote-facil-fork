@@ -8,7 +8,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import logo from '../../assets/logo-with-name.png'
 
-// BUG se o menu mobile estiver aberto, o conteúdo da página não é renderizado, portanto se a largura da tela aumentar e o menu mobile sumir, o conteúdo da página não aparece
+//? BUG se o menu mobile estiver aberto, o conteúdo da página não é renderizado, portanto se a largura da tela aumentar e o menu mobile sumir, o conteúdo da página não aparece
 export function DefaultLoggedPageLayout({
   children,
 }: {
