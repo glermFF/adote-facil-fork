@@ -6,8 +6,8 @@ describe('template spec', () => {
       return false
     })
 
-    cy.contains('label', 'Email').type("carlito.alves@gmail.com")    
-    cy.contains('label', 'Senha').type("carlitopass")
+    cy.contains('label', 'Email').type("teste.cypress@gmail.com")    
+    cy.contains('label', 'Senha').type("testectpress")
     
     cy.contains('button', 'Login').click()
 
@@ -18,7 +18,7 @@ describe('template spec', () => {
     cy.url().should('include', '/area_logada/editar_dados')
     
     cy.contains('label', 'Nome').find('input').clear()
-    cy.contains('label', 'Nome').type('CarlosGomes') //! Não aceita nome composto/sobrenomes
+    cy.contains('label', 'Nome').type('CarlosGomes')
 
     cy.contains('button', 'Salvar alterações').click()
     cy.wait(5000)
@@ -31,8 +31,8 @@ describe('template spec', () => {
       return false
     })
 
-    cy.contains('label', 'Email').type("carlito.alves@gmail.com")    
-    cy.contains('label', 'Senha').type("carlitopass")
+    cy.contains('label', 'Email').type("teste.cypress@gmail.com")    
+    cy.contains('label', 'Senha').type("testectpress")
     
     cy.contains('button', 'Login').click()
 
@@ -44,12 +44,11 @@ describe('template spec', () => {
 
     cy.contains('button', 'Alterar senha').click()
 
-    //! Não reclama sobre utilizar mesma senha
     cy.contains('label', 'Nova Senha').find('input').clear()
     cy.contains('label', 'Nova Senha').type('carlitopass')
 
     cy.contains('label', 'Confirmar nova senha').find('input').clear()
-    cy.contains('label', 'Confirmar nova senha').type('carlitopass')
+    cy.contains('label', 'Confirmar nova senha').type('cypressTeste')
 
     cy.contains('button', 'Salvar alterações').click()
   })
